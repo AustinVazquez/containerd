@@ -66,7 +66,6 @@ func TestMigration(t *testing.T) {
 	}
 
 	for _, tc := range migrationTests {
-		tc := tc
 		t.Run(tc.Name, func(t *testing.T) {
 			buf := bytes.NewBuffer(nil)
 			cmd := exec.Command("containerd", "-c", tc.File, "config", "migrate")
