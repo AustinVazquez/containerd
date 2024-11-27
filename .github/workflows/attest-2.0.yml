@@ -23,17 +23,17 @@ jobs:
       - name: Checkout containerd
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
       - run: mkdir -p release-artifacts
-      - run: gh repo set-default containerd/containerd
+      - run: gh repo set-default austinvazquez/containerd
       - name: Download artifacts
-        run: gh release download v2.0.0 -D ./release-artifacts
+        run: gh release download vnightly-11.25.24-16 -D ./release-artifacts
       - name: Attest Artifacts
         id: attest
         uses: actions/attest-build-provenance@ef244123eb79f2f7a7e75d99086184180e6d0018 # v1.4.4
         with:
           subject-path: ./release-artifacts/*.tar.gz
-      - run: mv ${{ steps.attest.outputs.bundle-path }} containerd-2.0.0-attestation.intoto.jsonl
+      - run: mv ${{ steps.attest.outputs.bundle-path }} containerd-nightly-11.25.24-16.2-attestation.intoto.jsonl
       - name: Save artifact
         uses: actions/upload-artifact@b4b15b8c7c6ac21ea08fcf65892d2ee8f75cf882 # v4.4.3
         with:
-          name: containerd-2.0-attestation-${{ github.action_ref }}
-          path: ./containerd-2.0.0-attestation.intoto.jsonl
+          name: containerd-nightly-11.25.24-16.2-attestation-${{ github.action_ref }}
+          path: ./containerd-nightly-11.25.24-16.2-attestation.intoto.jsonl
